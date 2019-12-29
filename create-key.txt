@@ -1,0 +1,2 @@
+mkdir keys
+ssh-keygen -t rsa -b 4096 -f ./keys/azure_key

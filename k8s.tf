@@ -21,8 +21,8 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     }
 
     service_principal {
-        client_id       = "${var.client_id}"
-        client_secret   = "${var.client_secret}"
+        client_id       = "${azuread_service_principal.aksadsp.id}"
+        client_secret   = "VT=uSgbTanZhyz@%nL9Hpd+Tfay_MRV#"
     }
 
     addon_profile {

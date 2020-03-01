@@ -1,5 +1,5 @@
 resource "azurerm_kubernetes_cluster" "k8s" {
-    depends_on          = [azuread_service_principal_password.akssppass, azurerm_log_analytics_solution.test]
+    depends_on          = [azuread_service_principal_password.akssppass, azurerm_log_analytics_solution.akslogssolution]
 
     name                = var.cluster_name
     location            = azurerm_resource_group.k8s.location
@@ -30,7 +30,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     addon_profile {
         oms_agent {
             enabled                    = true
-            log_analytics_workspace_id = azurerm_log_analytics_workspace.test.id
+            log_analytics_workspace_id = azurerm_log_analytics_workspace.akslogsworkspace.id
         }
     }
 

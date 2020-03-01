@@ -2,11 +2,11 @@ az ad sp create-for-rbac -n "aksplayground_sp"
 
 output
 {
-  "appId": "6df44998-6775-48f0-83a1-a6197b03064e",
+  "appId": "00000000-0000-0000-0000-000000000000",
   "displayName": "aksplayground_sp",
   "name": "http://aksplayground_sp",
-  "password": "fe744eca-58ea-4b6d-bcb2-2aad589bd6f0",
-  "tenant": "93b06bd5-190e-4ce5-9038-91e9ee41fcf8"
+  "password": "00000000-0000-0000-000000000000",
+  "tenant": "00000000-0000-0000-000000000000"
 }
 
 export TF_VAR_client_id="00000000-0000-0000-0000-000000000000"

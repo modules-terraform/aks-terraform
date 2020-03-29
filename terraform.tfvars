@@ -8,8 +8,16 @@ dns_prefix = "aksplayground"
 
 cluster_name = "aksplayground"
 
+default_node_pool_vm_size = "Standard_B2s"
+
+default_node_pool_disk_size = 64
+
 resource_group_name = "aksplayground-tf-group"
 
-location = "east us"
+resource_group_name_data_analytics = "aksplayground-tf-group-data-analytics-group"
 
-log_analytics_workspace_location = "east us"
+location = "east us 2"
+
+log_analytics_workspace_location = "east us 2"
+
+log_analytics_workspace_name = "testLogAnalyticsWorkspaceName"

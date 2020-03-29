@@ -3,6 +3,10 @@ variable "agent_count" {
   type = number
 }
 
+variable "kubernetes_version" {
+  type = string
+}
+
 variable "ssh_public_key" {
   default = "./keys/azure_key.pub"
   type = string

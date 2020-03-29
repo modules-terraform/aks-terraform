@@ -34,6 +34,8 @@ resource "azurerm_kubernetes_cluster" "k8s" {
         }
     }
 
+    kubernetes_version = var.kubernetes_version
+
     role_based_access_control {
         enabled = true
     }

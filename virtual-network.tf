@@ -1,3 +1,5 @@
+# https://github.com/terraform-providers/terraform-provider-azurerm/issues/3157#issuecomment-479207069
+
 resource "azurerm_virtual_network" "aksvnet" {
   name                = "${var.cluster_name}-network"
   location            = var.location
@@ -16,6 +18,6 @@ resource "azurerm_subnet" "aks" {
 # Grant AKS cluster access to join AKS subnet
 resource "azurerm_role_assignment" "aks_subnet" {
   scope                = azurerm_subnet.aks.id
-  role_definition_name = "Contributor"
+  role_definition_name = "Network Contributor"
   principal_id         = azuread_service_principal.aksadsp.id
 }

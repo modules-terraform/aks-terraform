@@ -20,6 +20,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
         vm_size         = var.default_node_pool_vm_size
         # os_type         = "Linux"
         os_disk_size_gb = var.default_node_pool_disk_size
+        vnet_subnet_id = azurerm_subnet.aks.id
     }
 
     service_principal {

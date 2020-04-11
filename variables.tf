@@ -55,3 +55,8 @@ variable log_analytics_workspace_sku {
   default = "PerGB2018"
   type = string
 }
+
+variable use_azure_monitor {
+  default = true
+  type = bool
+}

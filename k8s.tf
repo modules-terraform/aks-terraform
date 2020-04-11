@@ -1,5 +1,12 @@
+resource "null_resource" "provision" {
+   depends_on = [azuread_service_principal_password.akssppass, azurerm_log_analytics_solution.akslogssolution]
+   provisioner "local-exec" {
+    command = "sleep 120"
+  }
+}
+
 resource "azurerm_kubernetes_cluster" "k8s" {
-    depends_on          = [azuread_service_principal_password.akssppass, azurerm_log_analytics_solution.akslogssolution]
+    depends_on          = [azuread_service_principal_password.akssppass, azurerm_log_analytics_solution.akslogssolution, null_resource.provision]
 
     name                = var.cluster_name
     location            = azurerm_resource_group.k8s.location

@@ -41,10 +41,6 @@ variable location {
   type = string
 }
 
-variable log_analytics_workspace_name {
-  type = string
-}
-
 # refer https://azure.microsoft.com/global-infrastructure/services/?products=monitor for log analytics available regions
 variable log_analytics_workspace_location {
   type = string

@@ -20,6 +20,4 @@ location = "east us 2"
 
 log_analytics_workspace_location = "east us 2"
 
-log_analytics_workspace_name = "testLogAnalyticsWorkspaceName"
-
 use_azure_monitor = true

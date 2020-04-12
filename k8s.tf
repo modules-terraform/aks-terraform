@@ -32,7 +32,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
 
     service_principal {
         client_id       = azuread_service_principal.aksadsp.application_id
-        client_secret   = "VT=uSgbTanZhyz@%nL9Hpd+Tfay_MRV#"
+        client_secret   = random_string.password.result
     }
 
     # https://medium.com/@business_99069/terraform-0-12-conditional-block-7d166e4abcbf

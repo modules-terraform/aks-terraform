@@ -21,6 +21,11 @@ resource "azurerm_kubernetes_cluster" "k8s" {
         }
     }
 
+    network_profile {
+        network_plugin = "azure"
+        network_policy = "calico"
+    }
+
     default_node_pool {
         name            = "agentpool"
         node_count      = var.agent_count

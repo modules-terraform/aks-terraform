@@ -35,10 +35,14 @@ resource "azurerm_kubernetes_cluster" "k8s" {
         client_secret   = "VT=uSgbTanZhyz@%nL9Hpd+Tfay_MRV#"
     }
 
-    addon_profile {
-        oms_agent {
-            enabled                    = true
-            log_analytics_workspace_id = azurerm_log_analytics_workspace.akslogsworkspace.id
+    # https://medium.com/@business_99069/terraform-0-12-conditional-block-7d166e4abcbf
+    dynamic addon_profile {
+        for_each = !var.use_azure_monitor  ? [] : [1]
+        content {
+            oms_agent {
+                enabled                    = true
+                log_analytics_workspace_id = azurerm_log_analytics_workspace.akslogsworkspace[0].id
+            }
         }
     }
 

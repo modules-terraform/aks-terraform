@@ -33,6 +33,13 @@ resource "azurerm_kubernetes_cluster" "k8s" {
         # os_type         = "Linux"
         os_disk_size_gb = var.default_node_pool_disk_size
         vnet_subnet_id = azurerm_subnet.aks.id
+        tags = merge(
+            {
+                name = "k8sdefaultnodepool-${var.cluster_name}"
+                provisoned = "terraform"
+            },
+            var.custom_tags
+        )
     }
 
     service_principal {
@@ -57,7 +64,12 @@ resource "azurerm_kubernetes_cluster" "k8s" {
         enabled = true
     }
 
-    tags = {
-        Environment = "Development"
-    }
+    tags = merge(
+        {
+            name = "k8s-${var.cluster_name}"
+            provisoned = "terraform"
+        },
+        var.custom_tags
+    )
+
 }

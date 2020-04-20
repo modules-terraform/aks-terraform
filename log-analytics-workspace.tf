@@ -14,6 +14,13 @@ resource "azurerm_log_analytics_workspace" "akslogsworkspace" {
     location            = var.log_analytics_workspace_location
     resource_group_name = azurerm_resource_group.log_analytics[count.index].name
     sku                 = var.log_analytics_workspace_sku
+    tags = merge(
+        {
+            name = "azuremonitor-${var.cluster_name}"
+            provisoned = "terraform"
+        },
+        var.custom_tags
+    )
 }
 
 resource "azurerm_log_analytics_solution" "akslogssolution" {

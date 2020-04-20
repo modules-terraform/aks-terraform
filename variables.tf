@@ -56,3 +56,10 @@ variable use_azure_monitor {
   default = true
   type = bool
 }
+
+# https://blog.gruntwork.io/terraform-tips-tricks-loops-if-statements-and-gotchas-f739bbae55f9
+variable "custom_tags" {
+  description = "Custom tags that will set on the provisioned resources"
+  type        = map(string)
+  default     = {}
+}

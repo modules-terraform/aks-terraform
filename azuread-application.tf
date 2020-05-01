@@ -6,7 +6,7 @@ resource "azuread_application" "aksadapp" {
 }
 
 resource "azuread_service_principal" "aksadsp" {
-  application_id              = azuread_application.aksadapp.application_id
+  application_id             = azuread_application.aksadapp.application_id
 }
 
 resource "random_string" "password" {

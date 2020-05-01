@@ -6,11 +6,11 @@ resource "azurerm_virtual_network" "aksvnet" {
   resource_group_name = azurerm_resource_group.k8s.name
   address_space       = ["10.240.0.0/16"]
   tags = merge(
-      {
-          name = "k8svnet-${var.cluster_name}"
-          provisoned = "terraform"
-      },
-      var.custom_tags
+    {
+      name       = "k8svnet-${var.cluster_name}"
+      provisoned = "terraform"
+    },
+    var.custom_tags
   )
 }
 

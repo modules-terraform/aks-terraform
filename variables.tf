@@ -1,6 +1,6 @@
 variable "agent_count" {
   default = 3
-  type = number
+  type    = number
 }
 
 variable "kubernetes_version" {
@@ -21,12 +21,12 @@ variable cluster_name {
 
 variable default_node_pool_vm_size {
   default = "Standard_DS3_v2"
-  type = string
+  type    = string
 }
 
 variable default_node_pool_disk_size {
   default = 50
-  type = number
+  type    = number
 }
 
 variable resource_group_name {
@@ -49,12 +49,12 @@ variable log_analytics_workspace_location {
 # refer https://azure.microsoft.com/pricing/details/monitor/ for log analytics pricing 
 variable log_analytics_workspace_sku {
   default = "PerGB2018"
-  type = string
+  type    = string
 }
 
 variable use_azure_monitor {
   default = true
-  type = bool
+  type    = bool
 }
 
 # https://blog.gruntwork.io/terraform-tips-tricks-loops-if-statements-and-gotchas-f739bbae55f9

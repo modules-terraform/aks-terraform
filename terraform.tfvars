@@ -14,11 +14,7 @@ default_node_pool_disk_size = 64
 
 resource_group_name = "aksplayground-tf-group"
 
-resource_group_name_data_analytics = "aksplayground-tf-group-data-analytics-group"
-
 location = "east us 2"
-
-log_analytics_workspace_location = "east us 2"
 
 use_azure_monitor = true
 

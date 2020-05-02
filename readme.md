@@ -16,6 +16,12 @@ Give examples
 
 ### Installing
 
+- Generate ssh keys to authenticate with kubernetes
+```shell
+mkdir keys
+ssh-keygen -t rsa -b 4096 -f ./keys/azure_key -q -N ""
+```
+
 A step by step series of examples that tell you how to get a development env running
 
 Say what the step will be

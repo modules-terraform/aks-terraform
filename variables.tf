@@ -33,19 +33,11 @@ variable resource_group_name {
   type = string
 }
 
-variable "resource_group_name_data_analytics" {
-  type = string
-}
-
 variable location {
   type = string
 }
 
 # refer https://azure.microsoft.com/global-infrastructure/services/?products=monitor for log analytics available regions
-variable log_analytics_workspace_location {
-  type = string
-}
-
 # refer https://azure.microsoft.com/pricing/details/monitor/ for log analytics pricing 
 variable log_analytics_workspace_sku {
   default = "PerGB2018"

@@ -26,5 +26,5 @@ resource "azurerm_subnet" "aks" {
 resource "azurerm_role_assignment" "aks_subnet" {
   scope                = azurerm_subnet.aks.id
   role_definition_name = "Network Contributor"
-  principal_id         = azuread_service_principal.aksadsp.id
+  principal_id         = module.serviceprincipal.service_principal_application_id
 }

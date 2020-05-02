@@ -1,12 +1,12 @@
-resource "null_resource" "provision" {
-  depends_on = [azuread_service_principal_password.akssppass, azurerm_log_analytics_solution.akslogssolution]
-  provisioner "local-exec" {
-    command = "sleep 120"
-  }
-}
+# resource "null_resource" "provision" {
+#   depends_on = [azuread_service_principal_password.akssppass, azurerm_log_analytics_solution.akslogssolution]
+#   provisioner "local-exec" {
+#     command = "sleep 120"
+#   }
+# }
 
 resource "azurerm_kubernetes_cluster" "k8s" {
-  depends_on = [azuread_service_principal_password.akssppass, azurerm_log_analytics_solution.akslogssolution, null_resource.provision]
+  depends_on = [module.serviceprincipal, azurerm_log_analytics_solution.akslogssolution]
 
   name                = var.cluster_name
   location            = azurerm_resource_group.k8s.location
@@ -43,8 +43,8 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   }
 
   service_principal {
-    client_id     = azuread_service_principal.aksadsp.application_id
-    client_secret = random_string.password.result
+    client_id     = module.serviceprincipal.application_id
+    client_secret = module.serviceprincipal.password
   }
 
   # https://medium.com/@business_99069/terraform-0-12-conditional-block-7d166e4abcbf

@@ -3,10 +3,6 @@ provider "azurerm" {
   features {}
 }
 
-provider "null" {
-  version = "=2.1"
-}
-
 terraform {
   backend "azurerm" {
     resource_group_name  = "tf-state-group"

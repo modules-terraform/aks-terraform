@@ -1,16 +1,8 @@
-resource "null_resource" "provision" {
-  depends_on = [azuread_service_principal_password.akssppass, azurerm_log_analytics_solution.akslogssolution]
-  provisioner "local-exec" {
-    command = "sleep 120"
-  }
-}
-
 resource "azurerm_kubernetes_cluster" "k8s" {
-  depends_on = [azuread_service_principal_password.akssppass, azurerm_log_analytics_solution.akslogssolution, null_resource.provision]
 
   name                = var.cluster_name
-  location            = azurerm_resource_group.k8s.location
-  resource_group_name = azurerm_resource_group.k8s.name
+  location            = var.location
+  resource_group_name = var.resource_group_name
   dns_prefix          = var.dns_prefix
 
   linux_profile {
@@ -32,7 +24,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     vm_size    = var.default_node_pool_vm_size
     # os_type         = "Linux"
     os_disk_size_gb = var.default_node_pool_disk_size
-    vnet_subnet_id  = azurerm_subnet.aks.id
+    vnet_subnet_id = var.vnet_subnet_id
     tags = merge(
       {
         name       = "k8sdefaultnodepool-${var.cluster_name}"
@@ -43,17 +35,17 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   }
 
   service_principal {
-    client_id     = azuread_service_principal.aksadsp.application_id
-    client_secret = random_string.password.result
+    client_id     = var.service-principal.client-id
+    client_secret = var.service-principal.client-secret
   }
 
   # https://medium.com/@business_99069/terraform-0-12-conditional-block-7d166e4abcbf
   dynamic addon_profile {
-    for_each = ! var.use_azure_monitor ? [] : [1]
+    for_each = ! var.azuremonitor.use_azure_monitor ? [] : [1]
     content {
       oms_agent {
         enabled                    = true
-        log_analytics_workspace_id = azurerm_log_analytics_workspace.akslogsworkspace[0].id
+        log_analytics_workspace_id = var.azuremonitor.log_analytics_workspace_id
       }
     }
   }

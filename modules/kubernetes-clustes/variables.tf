@@ -48,7 +48,7 @@ variable location {
   type = string
 }
 
-variable azuremonitor{
+variable azuremonitor {
   type = object({
     use_azure_monitor = bool
     log_analytics_workspace_id = string

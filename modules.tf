@@ -19,7 +19,7 @@ module "virtual-network" {
   source = "./modules/virtual-network"
   name = var.cluster_name
   location = var.location
-  resource-group-name = var.resource_group_name
+  resource-group-name = azurerm_resource_group.k8s.name
   virtual-network-address-space = ["10.240.0.0/16"]
   subnet-address-prefixes = ["10.240.0.0/16"] 
   service_principal_application_id = module.serviceprincipal.service_principal_application_id
@@ -50,7 +50,7 @@ module kubernetes-cluster {
     client-id = module.serviceprincipal.application_id
     client-secret = module.serviceprincipal.password
   }
-  resource_group_name = var.resource_group_name
+  resource_group_name = azurerm_resource_group.k8s.name
   location = var.location
   azuremonitor = {
     use_azure_monitor = var.use_azure_monitor

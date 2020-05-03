@@ -1,5 +1,4 @@
 resource "azurerm_kubernetes_cluster" "k8s" {
-  depends_on = [module.serviceprincipal, module.log-analytics]
 
   name                = var.cluster_name
   location            = azurerm_resource_group.k8s.location
@@ -25,7 +24,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     vm_size    = var.default_node_pool_vm_size
     # os_type         = "Linux"
     os_disk_size_gb = var.default_node_pool_disk_size
-    vnet_subnet_id = module.virtual-network.subnet-id
+    vnet_subnet_id = var.vnet_subnet_id
     tags = merge(
       {
         name       = "k8sdefaultnodepool-${var.cluster_name}"
@@ -36,17 +35,17 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   }
 
   service_principal {
-    client_id     = module.serviceprincipal.application_id
-    client_secret = module.serviceprincipal.password
+    client_id     = var.service-principal.client-id
+    client_secret = var.service-principal.client-secret
   }
 
   # https://medium.com/@business_99069/terraform-0-12-conditional-block-7d166e4abcbf
   dynamic addon_profile {
-    for_each = ! var.use_azure_monitor ? [] : [1]
+    for_each = ! var.azuremonitor.use_azure_monitor ? [] : [1]
     content {
       oms_agent {
         enabled                    = true
-        log_analytics_workspace_id = module.log-analytics.workspace-id
+        log_analytics_workspace_id = var.azuremonitor.log_analytics_workspace_id
       }
     }
   }

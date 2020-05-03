@@ -14,7 +14,7 @@ default_node_pool_disk_size = 64
 
 resource_group_name = "aksplayground-tf-group"
 
-location = "brazil south"
+location = "east us 2"
 
 use_azure_monitor = true
 

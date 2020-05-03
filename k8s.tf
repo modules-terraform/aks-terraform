@@ -1,5 +1,5 @@
 resource "azurerm_kubernetes_cluster" "k8s" {
-  depends_on = [module.serviceprincipal, azurerm_log_analytics_solution.akslogssolution]
+  depends_on = [module.serviceprincipal, module.log-analytics]
 
   name                = var.cluster_name
   location            = azurerm_resource_group.k8s.location
@@ -46,7 +46,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     content {
       oms_agent {
         enabled                    = true
-        log_analytics_workspace_id = azurerm_log_analytics_workspace.akslogsworkspace[0].id
+        log_analytics_workspace_id = module.log-analytics.workspace-id
       }
     }
   }

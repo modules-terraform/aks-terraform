@@ -25,3 +25,13 @@ module "virtual-network" {
   service_principal_application_id = module.serviceprincipal.service_principal_application_id
   custom_tags = var.custom_tags
 }
+
+module "log-analytics" {
+  source = "./modules/log-analytics"
+  use_azure_monitor = var.use_azure_monitor
+  resource_group_name = "${var.resource_group_name}-loganalytics-group"
+  location = var.location
+  log_analytics_workspace_sku = var.log_analytics_workspace_sku
+  cluster_name = var.cluster_name
+  custom_tags = var.custom_tags
+}

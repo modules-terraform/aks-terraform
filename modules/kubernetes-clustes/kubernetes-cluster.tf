@@ -19,7 +19,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   }
 
   default_node_pool {
-    name       = "agentpool"
+    name       = "defaultpool"
     node_count = var.agent_count
     vm_size    = var.default_node_pool_vm_size
     # os_type         = "Linux"

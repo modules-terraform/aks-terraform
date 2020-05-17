@@ -21,10 +21,12 @@ variable cluster_name {
 
 variable "virtual-network-address-space" {
   type = list(string)
+  default = ["10.240.0.0/16"]
 }
 
 variable "subnet-address-prefixes" {
   type = list(string)
+  default = ["10.240.1.0/24"]
 }
 
 variable default_node_pool_vm_size {

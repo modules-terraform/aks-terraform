@@ -8,6 +8,10 @@ dns_prefix = "aksplayground"
 
 cluster_name = "aksplayground"
 
+virtual-network-address-space = ["10.240.0.0/16"]
+
+subnet-address-prefixes = ["10.240.1.0/24"]
+
 default_node_pool_vm_size = "Standard_B2s"
 
 default_node_pool_disk_size = 64

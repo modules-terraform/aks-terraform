@@ -19,6 +19,14 @@ variable cluster_name {
   type = string
 }
 
+variable "virtual-network-address-space" {
+  type = list(string)
+}
+
+variable "subnet-address-prefixes" {
+  type = list(string)
+}
+
 variable default_node_pool_vm_size {
   default = "Standard_DS3_v2"
   type    = string

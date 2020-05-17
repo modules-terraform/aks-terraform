@@ -1,4 +1,4 @@
-agent_count = 2
+node_count = 2
 
 kubernetes_version = "1.16.7"
 

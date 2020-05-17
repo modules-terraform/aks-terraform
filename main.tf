@@ -52,7 +52,7 @@ module "log-analytics" {
 
 module kubernetes-cluster {
   source                      = "./modules/kubernetes-clustes"
-  agent_count                 = var.agent_count
+  node_count                 = var.node_count
   kubernetes_version          = var.kubernetes_version
   ssh_public_key              = var.ssh_public_key
   dns_prefix                  = var.dns_prefix

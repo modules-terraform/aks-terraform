@@ -1,4 +1,4 @@
-variable "agent_count" {
+variable "node_count" {
   default = 3
   type    = number
 }

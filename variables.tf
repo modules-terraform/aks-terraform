@@ -1,4 +1,4 @@
-variable "agent_count" {
+variable "node_count" {
   default = 3
   type    = number
 }
@@ -17,6 +17,16 @@ variable "dns_prefix" {
 
 variable cluster_name {
   type = string
+}
+
+variable "virtual-network-address-space" {
+  type = list(string)
+  default = ["10.240.0.0/16"]
+}
+
+variable "subnet-address-prefixes" {
+  type = list(string)
+  default = ["10.240.1.0/24"]
 }
 
 variable default_node_pool_vm_size {

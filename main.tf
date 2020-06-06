@@ -34,8 +34,8 @@ module "virtual-network" {
   name                             = var.cluster_name
   location                         = var.location
   resource-group-name              = azurerm_resource_group.k8s.name
-  virtual-network-address-space    = ["10.240.0.0/16"]
-  subnet-address-prefixes          = ["10.240.0.0/16"]
+  virtual-network-address-space    = var.virtual-network-address-space
+  subnet-address-prefixes          = var.subnet-address-prefixes
   service_principal_application_id = module.serviceprincipal.service_principal_application_id
   custom_tags                      = var.custom_tags
 }
@@ -52,7 +52,7 @@ module "log-analytics" {
 
 module kubernetes-cluster {
   source                      = "./modules/kubernetes-clustes"
-  agent_count                 = var.agent_count
+  node_count                 = var.node_count
   kubernetes_version          = var.kubernetes_version
   ssh_public_key              = var.ssh_public_key
   dns_prefix                  = var.dns_prefix

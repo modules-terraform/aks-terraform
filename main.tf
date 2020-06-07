@@ -7,7 +7,7 @@ provider "random" {
 }
 
 provider "azurerm" {
-  version = "=2.8.0"
+  version = "=2.13.0"
   features {}
 }
 

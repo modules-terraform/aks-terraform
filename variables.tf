@@ -3,10 +3,6 @@ variable "node_count" {
   type    = number
 }
 
-variable "kubernetes_version" {
-  type = string
-}
-
 variable "ssh_public_key" {
   type = string
 }
@@ -20,12 +16,12 @@ variable cluster_name {
 }
 
 variable "virtual-network-address-space" {
-  type = list(string)
+  type    = list(string)
   default = ["10.240.0.0/16"]
 }
 
 variable "subnet-address-prefixes" {
-  type = list(string)
+  type    = list(string)
   default = ["10.240.1.0/24"]
 }
 

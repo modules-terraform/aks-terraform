@@ -3,10 +3,6 @@ variable "node_count" {
   type    = number
 }
 
-variable "kubernetes_version" {
-  type = string
-}
-
 variable "ssh_public_key" {
   type = string
 }

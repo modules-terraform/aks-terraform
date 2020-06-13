@@ -1,7 +1,5 @@
 node_count = 2
 
-kubernetes_version = "1.16.7"
-
 ssh_public_key = "./keys/azure_key.pub"
 
 dns_prefix = "aksplayground"

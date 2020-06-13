@@ -20,6 +20,11 @@ terraform {
   }
 }
 
+data "azurerm_kubernetes_service_versions" "aks-version" {
+  location = var.location
+  include_preview = false
+}
+
 module "serviceprincipal" {
   source                     = "./modules/service-principal"
   service_principal_end_data = "2020-12-31T23:59:59Z"
@@ -52,8 +57,8 @@ module "log-analytics" {
 
 module kubernetes-cluster {
   source                      = "./modules/kubernetes-clustes"
-  node_count                 = var.node_count
-  kubernetes_version          = var.kubernetes_version
+  node_count                  = var.node_count
+  kubernetes_version          = data.azurerm_kubernetes_service_versions.aks-version.latest_version
   ssh_public_key              = var.ssh_public_key
   dns_prefix                  = var.dns_prefix
   cluster_name                = var.cluster_name

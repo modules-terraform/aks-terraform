@@ -7,6 +7,6 @@ resource "azuread_service_principal_password" "akssppass" {
   value                = random_string.password.result
   end_date             = var.service_principal_end_data
   provisioner "local-exec" {
-    command = "sleep 120"
+    command = "sleep 180"
   }
 }

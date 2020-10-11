@@ -20,6 +20,13 @@ terraform {
   }
 }
 
+# locals {
+#   for_each = var.custom_tags 
+#   sp_tags  = concat(
+#     each.value
+#   )
+# }
+
 data "azurerm_kubernetes_service_versions" "aks-version" {
   location        = var.location
   include_preview = false
@@ -28,6 +35,8 @@ data "azurerm_kubernetes_service_versions" "aks-version" {
 module "serviceprincipal" {
   source                     = "./modules/service-principal"
   service_principal_end_data = "2020-12-31T23:59:59Z"
+  name                       = "${var.cluster_name}_sp_tfcreated"
+  # custom_tags                = local.sp_tags
   providers = {
     azuread = azuread
     random  = random

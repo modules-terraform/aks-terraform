@@ -7,7 +7,7 @@ provider "random" {
 }
 
 provider "azurerm" {
-  version = "=2.21.0"
+  version = "=2.29.0"
   features {}
 }
 
@@ -30,7 +30,7 @@ module "serviceprincipal" {
   service_principal_end_data = "2020-12-31T23:59:59Z"
   providers = {
     azuread = azuread
-    randon  = random
+    random  = random
   }
 }
 

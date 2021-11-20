@@ -1,24 +1,23 @@
-provider "azuread" {
-  version = "=1.0.0"
-}
-
-provider "random" {
-  version = "~>2.2"
+terraform {
+    required_providers {
+        azurerm = {
+            source = "hashicorp/azurerm"
+            version = "2.29.0"
+        }
+    }
 }
 
 provider "azurerm" {
-  version = "=2.29.0"
   features {}
 }
 
-terraform {
-  backend "azurerm" {
-    resource_group_name  = "tf-state-group"
-    storage_account_name = "tfstatestrgaccount"
-    container_name       = "tfstate"
-    key                  = "terraform.tfstate"
-  }
-}
+
+# locals {
+#   for_each = var.custom_tags 
+#   sp_tags  = concat(
+#     each.value
+#   )
+# }
 
 data "azurerm_kubernetes_service_versions" "aks-version" {
   location        = var.location
@@ -27,11 +26,20 @@ data "azurerm_kubernetes_service_versions" "aks-version" {
 
 module "serviceprincipal" {
   source                     = "./modules/service-principal"
-  service_principal_end_data = "2020-12-31T23:59:59Z"
-  providers = {
-    azuread = azuread
-    random  = random
-  }
+  service_principal_end_data = "2021-12-31T23:59:59Z"
+  name                       = "${var.cluster_name}_sp_tfcreated"
+}
+
+resource "azurerm_resource_group" "k8s" {
+  name     = var.resource_group_name
+  location = var.location
+  tags = merge(
+    {
+      name       = "k8sgroup-${var.cluster_name}"
+      provisoned = "terraform"
+    },
+    var.custom_tags
+  )
 }
 
 module "virtual-network" {

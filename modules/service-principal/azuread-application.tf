@@ -1,6 +1,6 @@
 resource "azuread_application" "aksadapp" {
   # name                       = "aksplayground_sp_tf"
-  name                       = var.name
+  display_name               = var.name
   # homepage                   = "https://aksplayground_sp_tf"
   homepage                   = "https://${var.name}"
   available_to_other_tenants = false

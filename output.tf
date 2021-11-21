@@ -27,11 +27,3 @@ output "host" {
   value = module.kubernetes-cluster.host
 }
 
-output "application_id" {
-  value = module.serviceprincipal.application_id
-}
-
-output "password" {
-  value = module.serviceprincipal.password
-  sensitive = true
-}

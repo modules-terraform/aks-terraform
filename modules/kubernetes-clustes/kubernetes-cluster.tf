@@ -22,6 +22,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     name       = "defaultpool"
     node_count = var.node_count
     vm_size    = var.default_node_pool_vm_size
+    #availability_zones = 
     # os_type         = "Linux"
     os_disk_size_gb = var.default_node_pool_disk_size
     vnet_subnet_id = var.vnet_subnet_id
@@ -34,9 +35,8 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     )
   }
 
-  service_principal {
-    client_id     = var.service-principal.client-id
-    client_secret = var.service-principal.client-secret
+  identity {
+    type = "SystemAssigned"
   }
 
   # https://medium.com/@business_99069/terraform-0-12-conditional-block-7d166e4abcbf

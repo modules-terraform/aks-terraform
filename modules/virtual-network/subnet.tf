@@ -7,8 +7,8 @@ resource "azurerm_subnet" "aks" {
 }
 
 # Grant AKS cluster access to join AKS subnet
-resource "azurerm_role_assignment" "aks_subnet" {
-  scope                = azurerm_subnet.aks.id
-  role_definition_name = "Network Contributor"
-  principal_id         = var.service_principal_application_id
-}
+# resource "azurerm_role_assignment" "aks_subnet" {
+#   scope                = azurerm_subnet.aks.id
+#   role_definition_name = "Network Contributor"
+#   principal_id         = var.service_principal_application_id
+# }

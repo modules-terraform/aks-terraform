@@ -33,13 +33,6 @@ variable vnet_subnet_id {
   type = string
 }
 
-variable service-principal {
-  type = object({
-    client-id = string
-    client-secret = string
-  })
-}
-
 variable resource_group_name {
   type = string
 }

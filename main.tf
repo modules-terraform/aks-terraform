@@ -2,7 +2,7 @@ terraform {
     required_providers {
         azurerm = {
             source = "hashicorp/azurerm"
-            version = "2.29.0"
+            version = "2.86.0"
         }
     }
 }
@@ -11,24 +11,11 @@ provider "azurerm" {
   features {}
 }
 
-
-# locals {
-#   for_each = var.custom_tags 
-#   sp_tags  = concat(
-#     each.value
-#   )
-# }
-
 data "azurerm_kubernetes_service_versions" "aks-version" {
   location        = var.location
   include_preview = false
 }
 
-module "serviceprincipal" {
-  source                     = "./modules/service-principal"
-  service_principal_end_data = "2021-12-31T23:59:59Z"
-  name                       = "${var.cluster_name}_sp_tfcreated"
-}
 
 resource "azurerm_resource_group" "k8s" {
   name     = var.resource_group_name
@@ -49,7 +36,7 @@ module "virtual-network" {
   resource-group-name              = azurerm_resource_group.k8s.name
   virtual-network-address-space    = var.virtual-network-address-space
   subnet-address-prefixes          = var.subnet-address-prefixes
-  service_principal_application_id = module.serviceprincipal.service_principal_application_id
+  #service_principal_application_id = module.serviceprincipal.service_principal_application_id
   custom_tags                      = var.custom_tags
 }
 
@@ -73,10 +60,6 @@ module kubernetes-cluster {
   default_node_pool_vm_size   = var.default_node_pool_vm_size
   default_node_pool_disk_size = var.default_node_pool_disk_size
   vnet_subnet_id              = module.virtual-network.subnet-id
-  service-principal = {
-    client-id     = module.serviceprincipal.application_id
-    client-secret = module.serviceprincipal.password
-  }
   resource_group_name = azurerm_resource_group.k8s.name
   location            = var.location
   azuremonitor = {

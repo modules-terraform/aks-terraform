@@ -18,9 +18,9 @@ variable "subnet-address-prefixes" {
   type = list(string)
 }
 
-variable "service_principal_application_id" {
-  type = string
-}
+# variable "service_principal_application_id" {
+#   type = string
+# }
 
 variable "custom_tags" {
   description = "Custom tags that will set on the provisioned resources"
